@@ -15,3 +15,5 @@ class ProfileViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.
     permission_classes = [IsProfileOwnerOrReadOnly]
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+
+    
