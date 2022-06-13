@@ -9,7 +9,6 @@ def createUserProfile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
-
 @receiver(pre_save, sender=User)
 def setUsername(sender, instance, **kwargs):
     if not instance.username:
