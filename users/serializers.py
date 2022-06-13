@@ -16,7 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
     old_password = serializers.CharField(write_only=True, required=False)
     username = serializers.CharField(read_only=True)
     profile = ProfileSerializer(read_only=True)
-
+    
+       
     def validated(self, data):
         request_method = self.context["request"].method
         password = data.get("password", None)
@@ -28,14 +29,14 @@ class UserSerializer(serializers.ModelSerializer):
             if password != None and old_password == None:
                 raise serializers.ValidationError({"info": "Please provide the old password"})
         return data
-
+     
     def create(self, validated_data):
         password = validated_data.pop("password")
         user = User.objects.create(**validated_data)
         user.set_password(password)
         user.save()
         return user
-
+    
     def update(self, instance, validated_data):
         try:
             user = instance
@@ -53,4 +54,16 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["id", "url", "username", "email", "first_name", "last_name", "profile", "old_password", "password"]
+        fields = [
+              "id", 
+              "url", 
+              "username", 
+              "email", 
+              "first_name", 
+              "last_name", 
+              "profile", 
+              "old_password", 
+              "password",
+             ]
+
+        
