@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "drf_social_oauth2",
     "users.apps.UsersConfig",
     "house.apps.HouseConfig",
+    "task.apps.TaskConfig",
 ]
 
 MIDDLEWARE = [
@@ -52,9 +53,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "django.template.context_processors.media",             # NEW
-                "social_django.context_processors.backends",            # NEW
-                "social_django.context_processors.login_redirect",      # NEW
+                "django.template.context_processors.media",  # NEW
+                "social_django.context_processors.backends",  # NEW
+                "social_django.context_processors.login_redirect",  # NEW
             ],
         },
     },
