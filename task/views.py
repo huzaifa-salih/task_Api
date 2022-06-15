@@ -1,28 +1,18 @@
 from django.utils import timezone
-from rest_framework import mixins
+from rest_framework import mixins, status, viewsets
 from rest_framework import status as S
-from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
+from task.serilaizer import AttachmentSerializer, TaskListSerializer, TaskSerializer
 from task.models import COMPLETED, NOT_COMPLETED, Attachment, Task, TaskList
 from task.permission import (
     IsAllowedToEditAttachmentElseNone,
     IsAllowedToEditTaskElseNone,
     IsAllowedToEditTaskListElseNone,
 )
-from task.serilaizer import AttachmentSerializer, TaskListSerializer, TaskSerializer
 
 
-class TaskListViewSet(
-    mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
-    # mixins.ListModelMixin,
-    viewsets.GenericViewSet,
-):
-
+class TaskListViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
     permission_classes = [IsAllowedToEditTaskListElseNone]
     queryset = TaskList.objects.all()
     serializer_class = TaskListSerializer
@@ -68,15 +58,7 @@ class TaskViewSet(viewsets.ModelViewSet):
             return Response({"detail": str(Exception)}, status=S.HTTP_400_BAD_REQUEST)
 
 
-class AttachmentViewSet(
-    mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
-    # mixins.ListModelMixin,
-    viewsets.GenericViewSet,
-):
-
+class AttachmentViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
     permission_classes = [IsAllowedToEditAttachmentElseNone]
     queryset = Attachment.objects.all()
     serializer_class = AttachmentSerializer
