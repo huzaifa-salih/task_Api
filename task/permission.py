@@ -3,7 +3,7 @@ from rest_framework import permissions
 
 class IsAllowedToEditTaskListElseNone(permissions.BasePermission):
     """
-    custom permission for TaskListViewSets to set only the cteateor editing permissions
+    Custom permissions for TaskListViewSet to only allow the creator editing permission.
     """
 
     def has_permission(self, request, view):
@@ -20,7 +20,7 @@ class IsAllowedToEditTaskListElseNone(permissions.BasePermission):
 
 class IsAllowedToEditTaskElseNone(permissions.BasePermission):
     """
-    custom permission for TaskViewSets to only allow a members of a house to access to its tasks.
+    Custom permissions for TaskViewSet to only allow members of a house access to its tasks.
     """
 
     def has_permission(self, request, view):
@@ -32,7 +32,7 @@ class IsAllowedToEditTaskElseNone(permissions.BasePermission):
         return request.user.profile.house == obj.task_list.house
 
 
-class IsAllowdToEditAttachmentElseNone(permissions.BasePermission):
+class IsAllowedToEditAttachmentElseNone(permissions.BasePermission):
     def has_permission(self, request, view):
         if not request.user.is_anonymous:
             return request.user.profile.house != None

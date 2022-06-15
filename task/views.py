@@ -1,13 +1,8 @@
-from ssl import create_default_context
-
-from django.http import QueryDict
-from platformdirs import user_cache_dir
-from requests import request
 from rest_framework import mixins, viewsets
 
 from task.models import Attachment, Task, TaskList
 from task.permission import (
-    IsAllowdToEditAttachmentElseNone,
+    IsAllowedToEditAttachmentElseNone,
     IsAllowedToEditTaskElseNone,
     IsAllowedToEditTaskListElseNone,
 )
@@ -49,6 +44,6 @@ class AttachmentViewSet(
     viewsets.GenericViewSet,
 ):
 
-    permission_classes = [IsAllowdToEditAttachmentElseNone]
+    permission_classes = [IsAllowedToEditAttachmentElseNone]
     queryset = Attachment.objects.all()
     serializer_class = AttachmentSerializer
