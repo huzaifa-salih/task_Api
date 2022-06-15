@@ -1,5 +1,4 @@
 from house.models import House
-from platformdirs import user_cache_dir
 from rest_framework import serializers
 
 from task.models import Attachment, Task, TaskList

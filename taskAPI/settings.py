@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "drf_social_oauth2",
     "users.apps.UsersConfig",
     "house.apps.HouseConfig",
-    "task.apps.TaskConfig",
+    "task",
 ]
 
 MIDDLEWARE = [
